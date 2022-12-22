@@ -1,36 +1,31 @@
-const io = require('socket.io');
+const socketio = require('socket.io');
 const http = require('http');
 
 const server = http.createServer();
-const ioServer = io(server);
+const ioServer = socketio(server);
 
 ioServer.on('connection', (socket) => {
-  console.log('A new client has connected!');
+  console.log('new client connected!');
 
   socket.on('make-choice', (choice) => {
-    console.log(`The client chose ${choice}`);
+    console.log(`client chose ${choice}`);
 
-    // Process the choice here
-    // For example, you might compare the choice to the server's choice and determine a winner
     const serverChoice = 'rock';
     let result;
     if (choice === serverChoice) {
-      result = 'Tie';
+      result = 'tie';
     } else if (
       (choice === 'rock' && serverChoice === 'scissors') ||
       (choice === 'scissors' && serverChoice === 'paper') ||
       (choice === 'paper' && serverChoice === 'rock')
     ) {
-      result = 'You win!';
+      result = 'you win';
     } else {
-      result = 'You lose';
+      result = 'you lose';
     }
 
-    // Send the result back to the client
     socket.emit('result', result);
   });
 });
 
-server.listen(3000, () => {
-  console.log('Server is listening on port 3000');
-});
+server.listen(3000);

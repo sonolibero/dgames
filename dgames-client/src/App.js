@@ -6,6 +6,7 @@ import socketIOClient from 'socket.io-client';
 
 function App() {
   const [currentAccount, setCurrentAccount] = React.useState('');
+  const [choice, setChoice] = React.useState('');
   const socket = socketIOClient('http://localhost:3000');
 
   const walletConnected = async () => {
@@ -38,6 +39,8 @@ function App() {
   }
 
   const handleChoice = (choice) => {
+    setChoice(choice);
+
     socket.emit('make-choice', choice);
     socket.on('result', (result) => {
       console.log(result);
@@ -64,6 +67,7 @@ function App() {
   return (
     <div>
       {currentAccount === '' ? ( renderConnectWallet() ) : ( renderChoices() )}
+      {choice ? <div>player chose: {choice}</div> : null}
     </div>
   )
 }

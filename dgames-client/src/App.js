@@ -39,11 +39,18 @@ function App() {
     <button onClick={connectWallet}>
       connect wallet
     </button>
-  );
+  )
+
+  const renderChoices = () => (
+    <div>
+      <p>connected account: {currentAccount}</p>
+      <Choices handleChoice={handleChoice} />
+    </div>
+  )
 
   const handleChoice = (choice) => {
     // Send the choice to the server or handle it in some other way
-  };
+  }
 
   React.useEffect(() => {
     walletConnected();
@@ -51,9 +58,9 @@ function App() {
 
   return (
     <div>
-      {currentAccount === "" ? ( renderConnectWallet() ) : ( <Choices handleChoice={handleChoice} /> )}
+      {currentAccount === "" ? ( renderConnectWallet() ) : ( renderChoices() )}
     </div>
-  );
-};
+  )
+}
 
 export default App;

@@ -1,10 +1,12 @@
 import './App.css';
 import React from 'react';
 import Choices from './Choices';
+import socketIOClient from 'socket.io-client';
 // import ethers from 'ethers';
 
 function App() {
   const [currentAccount, setCurrentAccount] = React.useState('');
+  const socket = socketIOClient('http://localhost:3000');
 
   const walletConnected = async () => {
     const { ethereum } = window;
@@ -35,23 +37,12 @@ function App() {
       setCurrentAccount(accounts[0]);
   }
 
-  const handleChoice = async (choice) => {
-    const response = await fetch('/api/choice', {
-      method: 'POST',
-      body: JSON.stringify({ choice }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    console.log(response);
-  
-    if (!response.ok) {
-      throw new Error(`HTTP error ${response.status}`);
-    }
-  
-    const result = await response.json();
-    console.log(result);
-  }
+  const handleChoice = (choice) => {
+    socket.emit('make-choice', choice);
+    socket.on('result', (result) => {
+      console.log(result);
+    });
+  };
 
   React.useEffect(() => {
     walletConnected();

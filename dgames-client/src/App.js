@@ -40,7 +40,7 @@ function App() {
   }
 
   const handleChoice = (c) => {
-    if(choice !== '') {
+    if(choice) {
       alert('you already chose');
       return;
     }
@@ -72,7 +72,7 @@ function App() {
   return (
     <div>
       {currentAccount === '' ? ( renderConnectWallet() ) : ( renderChoices() )}
-      {choice === '' ? null : <div>player chose: {choice}</div>}
+      {choice ? <div>player chose: {choice}</div> : null}
       {result ? <div>server response: {result}</div> : null}
     </div>
   )

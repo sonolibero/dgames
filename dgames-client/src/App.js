@@ -38,10 +38,14 @@ function App() {
       setCurrentAccount(accounts[0]);
   }
 
-  const handleChoice = (choice) => {
-    setChoice(choice);
+  const handleChoice = (c) => {
+    if(choice !== '') {
+      alert('you already chose');
+      return;
+    }
+    setChoice(c);
 
-    socket.emit('make-choice', choice);
+    socket.emit('make-choice', c);
     socket.on('result', (result) => {
       console.log(result);
     });
@@ -67,7 +71,7 @@ function App() {
   return (
     <div>
       {currentAccount === '' ? ( renderConnectWallet() ) : ( renderChoices() )}
-      {choice ? <div>player chose: {choice}</div> : null}
+      {choice === '' ? null : <div>player chose: {choice}</div>}
     </div>
   )
 }

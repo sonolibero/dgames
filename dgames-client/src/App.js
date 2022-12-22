@@ -4,7 +4,7 @@ import Choices from './Choices';
 // import ethers from 'ethers';
 
 function App() {
-  const [currentAccount, setCurrentAccount] = React.useState("");
+  const [currentAccount, setCurrentAccount] = React.useState('');
 
   const walletConnected = async () => {
     const { ethereum } = window;
@@ -19,7 +19,7 @@ function App() {
       setCurrentAccount(accounts[0]);
     }
     else {
-      setCurrentAccount("");
+      setCurrentAccount('');
     }
   }
 
@@ -30,13 +30,27 @@ function App() {
         return;
       }
 
-      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 
       setCurrentAccount(accounts[0]);
   }
 
-  const handleChoice = (choice) => {
-    // Send the choice to the server or handle it in some other way
+  const handleChoice = async (choice) => {
+    const response = await fetch('/api/choice', {
+      method: 'POST',
+      body: JSON.stringify({ choice }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log(response);
+  
+    if (!response.ok) {
+      throw new Error(`HTTP error ${response.status}`);
+    }
+  
+    const result = await response.json();
+    console.log(result);
   }
 
   React.useEffect(() => {
@@ -58,7 +72,7 @@ function App() {
 
   return (
     <div>
-      {currentAccount === "" ? ( renderConnectWallet() ) : ( renderChoices() )}
+      {currentAccount === '' ? ( renderConnectWallet() ) : ( renderChoices() )}
     </div>
   )
 }

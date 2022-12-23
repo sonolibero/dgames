@@ -8,7 +8,7 @@ function App() {
   const [currentAccount, setCurrentAccount] = React.useState('');
   const [choice, setChoice] = React.useState('');
   const [result, setResult] = React.useState('');
-  const socket = socketIOClient('https://dgames-server.sonolibero.repl.co');
+  const socket = socketIOClient('https://dgames-server.sonolibero.repl.co:3000');
 
   const walletConnected = async () => {
     const { ethereum } = window;

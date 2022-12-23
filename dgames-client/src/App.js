@@ -40,7 +40,7 @@ function App() {
   }
 
   const handleChoice = (c) => {
-    if(choice) {
+    if(choice) {
       alert('you already chose');
       return;
     }

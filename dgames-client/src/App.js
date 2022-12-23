@@ -8,6 +8,7 @@ function App() {
   const [currentAccount, setCurrentAccount] = React.useState('');
   const [choice, setChoice] = React.useState('');
   const [result, setResult] = React.useState('');
+  const [game, setGame] = React.useState('');
   const socket = socketIOClient('https://dgames-server.sonolibero.repl.co:3000');
 
   const walletConnected = async () => {
@@ -52,28 +53,49 @@ function App() {
     });
   };
 
-  React.useEffect(() => {
-    walletConnected();
-  })
-
   const renderConnectWallet = () => (
     <button onClick={connectWallet}>
       connect wallet
     </button>
   )
 
+  const selectGame = () => {
+    setGame('rps');
+  }
+
+  const renderSelectGame = () => (
+    <div>
+      <p>select game</p>
+      <button onClick={selectGame}>
+        rock paper scissor
+      </button>
+    </div>
+  )
+
   const renderRockPaperScissor = () => (
     <div>
-      <p>connected account: {currentAccount}</p>
+      <p>make your choice</p>
       <RockPaperScissor handleChoice={handleChoice} />
     </div>
   )
 
+  const renderPlayerChoice = () => (
+    <div>
+      <div>player choice: {choice}</div>
+      <div>server response: {result}</div>
+    </div>
+  )
+
+  React.useEffect(() => {
+    walletConnected();
+  })
+
   return (
     <div>
-      {currentAccount === '' ? ( renderConnectWallet() ) : ( renderRockPaperScissor() )}
-      {choice ? <div>player chose: {choice}</div> : null}
-      {choice ? <div>server response: {result}</div> : null}
+      {currentAccount === '' ? ( renderConnectWallet() ) : <p>connected account: {currentAccount}</p>}
+      {currentAccount !== '' & !game ? ( renderSelectGame() ) : null}
+      {game === 'rps' ? ( renderRockPaperScissor() ) : null}
+      {choice ? ( renderPlayerChoice() ) : null}
     </div>
   )
 }

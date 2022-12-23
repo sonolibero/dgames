@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import Choices from './Choices';
+import RockPaperScissor from './RockPaperScissor';
 import socketIOClient from 'socket.io-client';
 // import ethers from 'ethers';
 
@@ -65,7 +65,7 @@ function App() {
   const renderChoices = () => (
     <div>
       <p>connected account: {currentAccount}</p>
-      <Choices handleChoice={handleChoice} />
+      <RockPaperScissor handleChoice={handleChoice} />
     </div>
   )
 

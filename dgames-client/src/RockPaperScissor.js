@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Choices = ({ handleChoice }) => {
+const RockPaperScissor = ({ handleChoice }) => {
   return (
     <div>
       <button onClick={() => handleChoice('rock')}>rock</button>
@@ -10,4 +10,4 @@ const Choices = ({ handleChoice }) => {
   );
 };
 
-export default Choices;
+export default RockPaperScissor;

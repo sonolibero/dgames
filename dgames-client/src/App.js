@@ -62,7 +62,7 @@ function App() {
     </button>
   )
 
-  const renderChoices = () => (
+  const renderRockPaperScissor = () => (
     <div>
       <p>connected account: {currentAccount}</p>
       <RockPaperScissor handleChoice={handleChoice} />
@@ -71,9 +71,9 @@ function App() {
 
   return (
     <div>
-      {currentAccount === '' ? ( renderConnectWallet() ) : ( renderChoices() )}
+      {currentAccount === '' ? ( renderConnectWallet() ) : ( renderRockPaperScissor() )}
       {choice ? <div>player chose: {choice}</div> : null}
-      {result ? <div>server response: {result}</div> : null}
+      {choice ? <div>server response: {result}</div> : null}
     </div>
   )
 }

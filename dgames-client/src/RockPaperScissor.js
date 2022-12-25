@@ -4,9 +4,10 @@ import { ethers } from 'ethers';
 import RPS from './utils/RPS.json';
 
 function RockPaperScissor() {
+  const rps_array = ['rock', 'paper', 'scissors'];
   const [start, setStart] = React.useState(false);
   const [choice, setChoice] = React.useState('');
-  const [result, setResult] = React.useState('');
+  const [computer, setComputer] = React.useState('');
   const [processing, setProcessing] = React.useState(false);
   const CONTRACT_ADDRESS = '';
   // const socket = socketIOClient('https://dgames-server.sonolibero.repl.co');
@@ -17,6 +18,7 @@ function RockPaperScissor() {
       return;
     }
     setChoice('rock');
+    setComputer(randomPick(rps_array));
     // sendChoice();
   }
 
@@ -26,6 +28,7 @@ function RockPaperScissor() {
       return;
     }
     setChoice('paper');
+    setComputer(randomPick(rps_array));
     // sendChoice();
   }
 
@@ -35,7 +38,13 @@ function RockPaperScissor() {
       return;
     }
     setChoice('scissors');
+    setComputer(randomPick(rps_array));
     // sendChoice();
+  }
+
+  const randomPick = (array) => {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    return array[randomIndex];
   }
 
   // const sendChoice = () => {
@@ -79,7 +88,7 @@ function RockPaperScissor() {
   const renderPlayerChoice = () => (
     <div>
       <div>player choice: {choice}</div>
-      <div>server response: {result}</div>
+      <div>computer choice: {computer}</div>
     </div>
   )
 
@@ -94,7 +103,7 @@ function RockPaperScissor() {
 
   const renderStartGame = () => (
     <div>
-      <button onClick={startGame}>start game</button>
+      <button onClick={setStart(true)}>start game</button>
       {processing ? <p>starting new game...</p> : null}
     </div>
   )

@@ -1,5 +1,4 @@
 import React from 'react';
-// import socketIOClient from 'socket.io-client';
 import { ethers } from 'ethers';
 import RPS from './utils/RPS.json';
 
@@ -10,7 +9,6 @@ function RockPaperScissor() {
   const [result, setResult] = React.useState('');
   const [processing, setProcessing] = React.useState(false);
   const CONTRACT_ADDRESS = '';
-  // const socket = socketIOClient('https://dgames-server.sonolibero.repl.co');
 
   const chooseRock = () => {
     if(choice) {
@@ -40,13 +38,6 @@ function RockPaperScissor() {
     const randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
   }
-
-  // const sendChoice = () => {
-  //   socket.emit('make-choice', choice);
-  //   socket.on('result', (r) => {
-  //     setResult(r);
-  //   });
-  // }
 
   const startGame = async () => {
     try{

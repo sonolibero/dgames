@@ -7,8 +7,7 @@ function RockPaperScissor() {
   const [choice, setChoice] = React.useState('');
   const [computer, setComputer] = React.useState('');
   const [result, setResult] = React.useState('');
-  const [processing, setProcessing] = React.useState(false);
-  const CONTRACT_ADDRESS = '0x968AE3Df2268A6642E34BEF9D6729658dA0Cc4e1';
+  const CONTRACT_ADDRESS = '0x7A6cacDB73b9f037C67E41Afe693D344769977Cb';
 
   const chooseRock = () => {
     if(choice) {
@@ -53,17 +52,8 @@ function RockPaperScissor() {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, RPS.abi, signer);
 
-      let txn = await contract.newGame();
-      setProcessing(true);
-
-      const receipt = await provider.getTransactionReceipt(txn.hash);
-      setProcessing(false);
-
-      if (receipt.status === 1) {
-        setStart(true);
-      } else {
-        alert('transaction failed');
-      }
+      await contract.newGame({value : ethers.utils.parseEther('0.001')});
+      setStart(true);
     }
     catch(error) {
       alert(error)
@@ -88,10 +78,7 @@ function RockPaperScissor() {
   )
 
   const renderStartGame = () => (
-    <div>
-      <button onClick={startGame}>start game</button>
-      {processing ? <p>starting new game...</p> : null}
-    </div>
+    <button onClick={startGame}>start game</button>
   )
 
   React.useEffect(() => {

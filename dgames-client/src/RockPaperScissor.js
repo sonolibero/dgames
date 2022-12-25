@@ -8,7 +8,7 @@ function RockPaperScissor() {
   const [computer, setComputer] = React.useState('');
   const [result, setResult] = React.useState('');
   const [processing, setProcessing] = React.useState(false);
-  const CONTRACT_ADDRESS = '';
+  const CONTRACT_ADDRESS = '0x968AE3Df2268A6642E34BEF9D6729658dA0Cc4e1';
 
   const chooseRock = () => {
     if(choice) {

@@ -4,7 +4,6 @@ import { ethers } from 'ethers';
 import RPS from './utils/RPS.json';
 
 function RockPaperScissor() {
-  const rps_array = ['rock', 'paper', 'scissors'];
   const [start, setStart] = React.useState(false);
   const [choice, setChoice] = React.useState('');
   const [computer, setComputer] = React.useState('');
@@ -19,8 +18,6 @@ function RockPaperScissor() {
       return;
     }
     setChoice('rock');
-    evalResult();
-    // sendChoice();
   }
 
   const choosePaper = () => {
@@ -29,8 +26,6 @@ function RockPaperScissor() {
       return;
     }
     setChoice('paper');
-    evalResult();
-    // sendChoice();
   }
 
   const chooseScissors = () => {
@@ -39,32 +34,11 @@ function RockPaperScissor() {
       return;
     }
     setChoice('scissors');
-    evalResult();
-    // sendChoice();
   }
 
   const randomPick = (array) => {
     const randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
-  }
-
-  const evalResult = () => {
-    setComputer(randomPick(rps_array));
-
-    console.log(choice);
-    console.log(computer);
-    
-    if (choice === computer) {
-      setResult('tie');
-    } else if (
-      (choice === 'rock' && computer === 'scissors') ||
-      (choice === 'scissors' && computer === 'paper') ||
-      (choice === 'paper' && computer === 'rock')
-    ) {
-      setResult('you win');
-    } else {
-      setResult('you lose');
-    }
   }
 
   // const sendChoice = () => {
@@ -128,6 +102,22 @@ function RockPaperScissor() {
       {processing ? <p>starting new game...</p> : null}
     </div>
   )
+
+  React.useEffect(() => {
+    setComputer(randomPick(['rock', 'paper', 'scissors']));
+
+    if (choice === computer) {
+      setResult('tie');
+    } else if (
+      (choice === 'rock' && computer === 'scissors') ||
+      (choice === 'scissors' && computer === 'paper') ||
+      (choice === 'paper' && computer === 'rock')
+    ) {
+      setResult('you win');
+    } else {
+      setResult('you lose');
+    }
+  }, [choice, computer]);
 
   return (
     <div>

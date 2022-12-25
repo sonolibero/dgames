@@ -98,7 +98,7 @@ function RockPaperScissor() {
 
   const renderStartGame = () => (
     <div>
-      <button onClick={setStart(true)}>start game</button>
+      <button onClick={startGame}>start game</button>
       {processing ? <p>starting new game...</p> : null}
     </div>
   )

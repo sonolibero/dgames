@@ -38,9 +38,9 @@ function App() {
   }
 
   const renderConnectWallet = () => (
-    <button onClick={connectWallet}>
-      connect wallet
-    </button>
+    <div>
+      <button onClick={connectWallet}>connect wallet</button>
+    </div>
   )
 
   const selectGame = () => {

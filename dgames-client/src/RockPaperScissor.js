@@ -8,6 +8,7 @@ function RockPaperScissor() {
   const [start, setStart] = React.useState(false);
   const [choice, setChoice] = React.useState('');
   const [computer, setComputer] = React.useState('');
+  const [result, setResult] = React.useState('');
   const [processing, setProcessing] = React.useState(false);
   const CONTRACT_ADDRESS = '';
   // const socket = socketIOClient('https://dgames-server.sonolibero.repl.co');
@@ -18,7 +19,7 @@ function RockPaperScissor() {
       return;
     }
     setChoice('rock');
-    setComputer(randomPick(rps_array));
+    evalResult();
     // sendChoice();
   }
 
@@ -28,7 +29,7 @@ function RockPaperScissor() {
       return;
     }
     setChoice('paper');
-    setComputer(randomPick(rps_array));
+    evalResult();
     // sendChoice();
   }
 
@@ -38,13 +39,32 @@ function RockPaperScissor() {
       return;
     }
     setChoice('scissors');
-    setComputer(randomPick(rps_array));
+    evalResult();
     // sendChoice();
   }
 
   const randomPick = (array) => {
     const randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
+  }
+
+  const evalResult = () => {
+    setComputer(randomPick(rps_array));
+
+    console.log(choice);
+    console.log(computer);
+    
+    if (choice === computer) {
+      setResult('tie');
+    } else if (
+      (choice === 'rock' && computer === 'scissors') ||
+      (choice === 'scissors' && computer === 'paper') ||
+      (choice === 'paper' && computer === 'rock')
+    ) {
+      setResult('you win');
+    } else {
+      setResult('you lose');
+    }
   }
 
   // const sendChoice = () => {
@@ -89,6 +109,7 @@ function RockPaperScissor() {
     <div>
       <div>player choice: {choice}</div>
       <div>computer choice: {computer}</div>
+      <div>game result: {result}</div>
     </div>
   )
 

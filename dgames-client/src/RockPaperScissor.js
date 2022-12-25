@@ -1,5 +1,5 @@
 import React from 'react';
-import socketIOClient from 'socket.io-client';
+// import socketIOClient from 'socket.io-client';
 import { ethers } from 'ethers';
 import RPS from './utils/RPS.json';
 
@@ -9,7 +9,7 @@ function RockPaperScissor() {
   const [result, setResult] = React.useState('');
   const [processing, setProcessing] = React.useState(false);
   const CONTRACT_ADDRESS = '';
-  const socket = socketIOClient('https://dgames-server.sonolibero.repl.co');
+  // const socket = socketIOClient('https://dgames-server.sonolibero.repl.co');
 
   const chooseRock = () => {
     if(choice) {
@@ -17,7 +17,7 @@ function RockPaperScissor() {
       return;
     }
     setChoice('rock');
-    sendChoice();
+    // sendChoice();
   }
 
   const choosePaper = () => {
@@ -26,7 +26,7 @@ function RockPaperScissor() {
       return;
     }
     setChoice('paper');
-    sendChoice();
+    // sendChoice();
   }
 
   const chooseScissors = () => {
@@ -35,15 +35,15 @@ function RockPaperScissor() {
       return;
     }
     setChoice('scissors');
-    sendChoice();
+    // sendChoice();
   }
 
-  const sendChoice = () => {
-    socket.emit('make-choice', choice);
-    socket.on('result', (r) => {
-      setResult(r);
-    });
-  }
+  // const sendChoice = () => {
+  //   socket.emit('make-choice', choice);
+  //   socket.on('result', (r) => {
+  //     setResult(r);
+  //   });
+  // }
 
   const startGame = async () => {
     try{

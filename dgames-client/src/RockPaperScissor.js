@@ -4,6 +4,7 @@ import RPS from './utils/RPS.json';
 
 function RockPaperScissor() {
   const [start, setStart] = React.useState(false);
+  const [processing, setProcessing] = React.useState(false);
   const [choice, setChoice] = React.useState('');
   const [computer, setComputer] = React.useState('');
   const [result, setResult] = React.useState('');
@@ -39,6 +40,10 @@ function RockPaperScissor() {
   }
 
   const startGame = async () => {
+    if(processing) {
+      alert('game starting soon');
+      return;
+    }
     try{
       const { ethereum } = window;
       let chainId = await ethereum.request({ method: 'eth_chainId' });
@@ -52,10 +57,14 @@ function RockPaperScissor() {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, RPS.abi, signer);
 
-      await contract.newGame({value : ethers.utils.parseEther('0.001')});
+      const txn =  await contract.newGame({value : ethers.utils.parseEther('0.001')});
+      setProcessing(true)
+      await txn.wait();
+      setProcessing(false)
       setStart(true);
     }
     catch(error) {
+      setProcessing(false)
       alert(error)
     }
   }
@@ -78,7 +87,10 @@ function RockPaperScissor() {
   )
 
   const renderStartGame = () => (
-    <button onClick={startGame}>start game</button>
+    <div>
+      <button onClick={startGame}>start game</button>
+      {processing ? <p>starting new game..</p> : null}
+    </div>
   )
 
   React.useEffect(() => {

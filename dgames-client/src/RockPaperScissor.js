@@ -1,10 +1,14 @@
 import React from 'react';
 import socketIOClient from 'socket.io-client';
+import { ethers } from 'ethers';
+import RPS from './utils/RPS.json';
 
 function RockPaperScissor() {
   const [start, setStart] = React.useState(false);
   const [choice, setChoice] = React.useState('');
   const [result, setResult] = React.useState('');
+  const [processing, setProcessing] = React.useState(false);
+  const CONTRACT_ADDRESS = '';
   const socket = socketIOClient('https://dgames-server.sonolibero.repl.co');
 
   const chooseRock = () => {
@@ -41,8 +45,35 @@ function RockPaperScissor() {
     });
   }
 
-  const startGame = () => {
-    setStart(true)
+  const startGame = async () => {
+    try{
+      const { ethereum } = window;
+      let chainId = await ethereum.request({ method: 'eth_chainId' });
+      const goerliChainId = '0x5';
+      if (chainId !== goerliChainId) {
+        alert('pls connect to Goerli Testnet');
+        return;
+      }
+  
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(CONTRACT_ADDRESS, RPS.abi, signer);
+
+      let txn = await contract.newGame();
+      setProcessing(true);
+
+      const receipt = await provider.getTransactionReceipt(txn.hash);
+      setProcessing(false);
+
+      if (receipt.status === 1) {
+        setStart(true);
+      } else {
+        alert('transaction failed');
+      }
+    }
+    catch(error) {
+      alert(error)
+    }
   }
 
   const renderPlayerChoice = () => (
@@ -62,7 +93,10 @@ function RockPaperScissor() {
   )
 
   const renderStartGame = () => (
-    <button onClick={startGame}>start game</button>
+    <div>
+      <button onClick={startGame}>start game</button>
+      {processing ? <p>starting new game...</p> : null}
+    </div>
   )
 
   return (

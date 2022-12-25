@@ -1,7 +1,6 @@
 import './App.css';
 import React from 'react';
 import RockPaperScissor from './RockPaperScissor';
-// import ethers from 'ethers';
 
 function App() {
   const [currentAccount, setCurrentAccount] = React.useState('');

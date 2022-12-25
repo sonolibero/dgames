@@ -3,6 +3,8 @@ import React from 'react';
 import RockPaperScissor from './RockPaperScissor';
 
 function App() {
+  const TWITTER_HANDLE = 'verci_eth';
+  const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
   const [currentAccount, setCurrentAccount] = React.useState('');
   const [game, setGame] = React.useState('');
 
@@ -60,6 +62,7 @@ function App() {
 
   return (
     <div>
+      <a href={TWITTER_LINK} target="_blank" rel="noreferrer">{`built by @${TWITTER_HANDLE}`}</a>
       {currentAccount === '' ? ( renderConnectWallet() ) : <p>connected account: {currentAccount}</p>}
       {currentAccount !== '' & !game ? ( renderSelectGame() ) : null}
       {game === 'rps' ? ( <RockPaperScissor /> ) : null}

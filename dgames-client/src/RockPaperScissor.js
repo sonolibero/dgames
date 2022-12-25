@@ -65,7 +65,15 @@ function RockPaperScissor() {
     }
     catch(error) {
       setProcessing(false)
-      alert(error)
+      if(error.code === 'ACTION_REJECTED') {
+        alert('accept the transaction to start a new game')
+      }
+      else if(error.code === 'TRANSACTION_REPLACED') {
+        alert('transaction has been canceled')
+      }
+      else {
+        alert(`pls contact @verci_eth to report this error\n\nerror code: ${error.code}\n\n${error}`)
+      }
     }
   }
 
@@ -88,7 +96,7 @@ function RockPaperScissor() {
 
   const renderStartGame = () => (
     <div>
-      <button onClick={startGame}>start game</button>
+      <button onClick={startGame}>start new game</button>
       {processing ? <p>starting new game..</p> : null}
     </div>
   )

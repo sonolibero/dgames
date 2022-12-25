@@ -4,7 +4,7 @@ import socketIOClient from 'socket.io-client';
 function RockPaperScissor() {
   const [choice, setChoice] = React.useState('');
   const [result, setResult] = React.useState('');
-  const socket = socketIOClient('https://dgames-server.sonolibero.repl.co:3000');
+  const socket = socketIOClient('https://dgames-server.sonolibero.repl.co');
 
   const chooseRock = () => {
     if(choice) {

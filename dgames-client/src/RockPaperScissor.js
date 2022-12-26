@@ -36,6 +36,8 @@ function RockPaperScissor() {
 
   const playAgain = () => {
     setChoice('');
+    setComputer('');
+    setResult('');
     setStart(false);
   }
 
@@ -82,7 +84,7 @@ function RockPaperScissor() {
     }
   }
 
-  const renderPlayerChoice = () => (
+  const renderGameResults = () => (
     <div>
       <p>player choice: {choice}</p>
       <p>computer choice: {computer}</p>
@@ -108,25 +110,29 @@ function RockPaperScissor() {
   )
 
   React.useEffect(() => {
-    setComputer(randomPick(['rock', 'paper', 'scissors']));
+    if(choice) {
+      if(!computer) {
+        setComputer(randomPick(['rock', 'paper', 'scissors']));
+      }
 
-    if (choice === computer) {
-      setResult('tie');
-    } else if (
-      (choice === 'rock' && computer === 'scissors') ||
-      (choice === 'scissors' && computer === 'paper') ||
-      (choice === 'paper' && computer === 'rock')
-    ) {
-      setResult('you win > rewards coming next version');
-    } else {
-      setResult('you lose');
+      if (choice === computer) {
+        setResult('tie');
+      } else if (
+        (choice === 'rock' && computer === 'scissors') ||
+        (choice === 'scissors' && computer === 'paper') ||
+        (choice === 'paper' && computer === 'rock')
+      ) {
+        setResult('you win > rewards coming next version');
+      } else {
+        setResult('you lose');
+      }
     }
   }, [choice, computer]);
 
   return (
     <div>
       {start ? ( renderMakeChoice() ) : ( renderStartGame() )}
-      {choice ? ( renderPlayerChoice() ) : null}
+      {choice ? ( renderGameResults() ) : null}
     </div>
   )
 }

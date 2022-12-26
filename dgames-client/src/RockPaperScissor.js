@@ -34,6 +34,11 @@ function RockPaperScissor() {
     setChoice('scissors');
   }
 
+  const playAgain = () => {
+    setChoice('');
+    setStart(false);
+  }
+
   const randomPick = (array) => {
     const randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
@@ -79,9 +84,10 @@ function RockPaperScissor() {
 
   const renderPlayerChoice = () => (
     <div>
-      <div>player choice: {choice}</div>
-      <div>computer choice: {computer}</div>
-      <div>game result: {result}</div>
+      <p>player choice: {choice}</p>
+      <p>computer choice: {computer}</p>
+      <p>game result: {result}</p>
+      <button onClick={playAgain}>play again</button>
     </div>
   )
 
@@ -111,7 +117,7 @@ function RockPaperScissor() {
       (choice === 'scissors' && computer === 'paper') ||
       (choice === 'paper' && computer === 'rock')
     ) {
-      setResult('you win');
+      setResult('you win > rewards coming next version');
     } else {
       setResult('you lose');
     }

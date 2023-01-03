@@ -7,7 +7,7 @@ function RockPaperScissor() {
   const [computer, setComputer] = React.useState('');
   const [result, setResult] = React.useState('');
   const [processing, setProcessing] = React.useState(false);
-  const CONTRACT_ADDRESS = '0x5F5e4B003f341f7c572963E1499C16eDA2637D60';
+  const CONTRACT_ADDRESS = '0x12Cc854532e70E6159CaC4dDcad4568459cfb6b8';
 
   const chooseRock = () => {
     if(choice) {
@@ -53,6 +53,19 @@ function RockPaperScissor() {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, RPS.abi, signer);
 
+      contract.on('GameResult', (computer, message) => {
+        if(computer.toNumber() === 0) {
+          setComputer('rock');
+        }
+        else if(computer.toNumber() === 1) {
+          setComputer('paper');
+        }
+        else if(computer.toNumber() === 2) {
+          setComputer('scissors');
+        }
+        setResult(message);
+      });
+
       setProcessing(true);
       const txn =  await contract.playGame(player_choice, {value : ethers.utils.parseEther('0.001'), gasLimit : 100000});
       await txn.wait();
@@ -74,18 +87,25 @@ function RockPaperScissor() {
     }
   }
 
+  const renderFinalResults = () => (
+    <div>
+      <p>computer choice: {computer}</p>
+      <p>game result: {result}</p>
+      <button onClick={playAgain}>play again</button>
+    </div>
+  )
+
   const renderGameResults = () => (
     <div>
       <p>player choice: {choice}</p>
-      <p>computer choice: {computer}</p>
-      <p>game result: {result}</p>
-      {processing ? <p>processing game result..</p> : <button onClick={playAgain}>play again</button>}
+      {processing ? <p>processing game result..</p> : ( renderFinalResults() )}
     </div>
   )
 
   const renderMakeChoice = () => (
     <div>
       <p>make your choice</p>
+      <p>if you win, u get 2x your bet</p>
       <button onClick={chooseRock}>rock</button>
       <button onClick={choosePaper}>paper</button>
       <button onClick={chooseScissors}>scissors</button>

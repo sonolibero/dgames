@@ -3,12 +3,11 @@ import { ethers } from 'ethers';
 import RPS from './utils/RPS.json';
 
 function RockPaperScissor() {
-  const [start, setStart] = React.useState(false);
-  const [processing, setProcessing] = React.useState(false);
   const [choice, setChoice] = React.useState('');
   const [computer, setComputer] = React.useState('');
   const [result, setResult] = React.useState('');
-  const CONTRACT_ADDRESS = '0x7A6cacDB73b9f037C67E41Afe693D344769977Cb';
+  const [processing, setProcessing] = React.useState(false);
+  const CONTRACT_ADDRESS = '0x5F5e4B003f341f7c572963E1499C16eDA2637D60';
 
   const chooseRock = () => {
     if(choice) {
@@ -38,19 +37,9 @@ function RockPaperScissor() {
     setChoice('');
     setComputer('');
     setResult('');
-    setStart(false);
   }
 
-  const randomPick = (array) => {
-    const randomIndex = Math.floor(Math.random() * array.length);
-    return array[randomIndex];
-  }
-
-  const startGame = async () => {
-    if(processing) {
-      alert('game starting soon');
-      return;
-    }
+  const playGame = async (player_choice) => {
     try{
       const { ethereum } = window;
       let chainId = await ethereum.request({ method: 'eth_chainId' });
@@ -64,14 +53,14 @@ function RockPaperScissor() {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(CONTRACT_ADDRESS, RPS.abi, signer);
 
-      const txn =  await contract.newGame({value : ethers.utils.parseEther('0.001')});
-      setProcessing(true)
+      setProcessing(true);
+      const txn =  await contract.playGame(player_choice, {value : ethers.utils.parseEther('0.001'), gasLimit : 100000});
       await txn.wait();
-      setProcessing(false)
-      setStart(true);
+      setProcessing(false);
     }
     catch(error) {
-      setProcessing(false)
+      setProcessing(false);
+      playAgain();
       if(error.code === 'ACTION_REJECTED') {
         alert('accept the transaction to start a new game')
       }
@@ -79,6 +68,7 @@ function RockPaperScissor() {
         alert('transaction has been canceled')
       }
       else {
+        console.log(error)
         alert(`pls contact @verci_eth to report this error\n\nerror code: ${error.code}\n\n${error}`)
       }
     }
@@ -89,7 +79,7 @@ function RockPaperScissor() {
       <p>player choice: {choice}</p>
       <p>computer choice: {computer}</p>
       <p>game result: {result}</p>
-      <button onClick={playAgain}>play again</button>
+      {processing ? <p>processing game result..</p> : <button onClick={playAgain}>play again</button>}
     </div>
   )
 
@@ -102,37 +92,25 @@ function RockPaperScissor() {
     </div>
   )
 
-  const renderStartGame = () => (
-    <div>
-      <button onClick={startGame}>start new game</button>
-      {processing ? <p>starting new game..</p> : null}
-    </div>
-  )
-
   React.useEffect(() => {
-    if(choice) {
-      if(!computer) {
-        setComputer(randomPick(['rock', 'paper', 'scissors']));
-      }
-
-      if (choice === computer) {
-        setResult('tie');
-      } else if (
-        (choice === 'rock' && computer === 'scissors') ||
-        (choice === 'scissors' && computer === 'paper') ||
-        (choice === 'paper' && computer === 'rock')
-      ) {
-        setResult('you win > rewards coming next version');
-      } else {
-        setResult('you lose');
-      }
+    let player_choice;
+    if(choice === 'rock') {
+      player_choice = 0;
+      playGame(player_choice);
     }
-  }, [choice, computer]);
+    else if(choice === 'paper') {
+      player_choice = 1;
+      playGame(player_choice);
+    }
+    else if(choice === 'scissors') {
+      player_choice = 2;
+      playGame(player_choice);
+    }
+  }, [choice]);
 
   return (
     <div>
-      {start ? ( renderMakeChoice() ) : ( renderStartGame() )}
-      {choice ? ( renderGameResults() ) : null}
+      {choice ? ( renderGameResults() ) : ( renderMakeChoice() )}
     </div>
   )
 }

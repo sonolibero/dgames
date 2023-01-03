@@ -3,6 +3,8 @@ pragma solidity ^0.8.9;
 
 contract RPS {
 
+    constructor() payable {}
+
     event GameResult(uint256 computer, string message);
 
     function playGame(uint256 _choice) payable public {

@@ -4,7 +4,7 @@ const main = async () => {
     await contract.deployed();
     console.log('contract deployed to:', contract.address);
 
-    let txn = await contract.playGame(1, {value: 123456789});
+    let txn = await contract.playGame(1, {value : hre.ethers.utils.parseEther('0.001')});
     let result = await txn.wait();
     console.log('transaction here:', txn);
     console.log('returend value here:', result);

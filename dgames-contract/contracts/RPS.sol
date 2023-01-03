@@ -3,20 +3,22 @@ pragma solidity ^0.8.9;
 
 contract RPS {
 
-    function playGame(uint256 _choice) payable public returns (uint256) {
+    event GameResult(uint256 computer, string message);
+
+    function playGame(uint256 _choice) payable public {
         uint256 computer = random();
 
         if (_choice == computer) {
-            return 1;
+            emit GameResult(computer, 'draw');
         } else if (
             (_choice == 0 && computer == 1) ||
             (_choice == 1 && computer == 2) ||
             (_choice == 2 && computer == 0)
         ) {
             payable(msg.sender).transfer(msg.value * 2);
-            return 2;
+            emit GameResult(computer, 'player win');
         } else {
-            return 0;
+            emit GameResult(computer, 'player lose');
         }
     }
 

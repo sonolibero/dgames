@@ -4,8 +4,10 @@ const main = async () => {
     await contract.deployed();
     console.log('contract deployed to:', contract.address);
 
-    let txn = await contract.newGame({ value: 10000000 })
-    await txn.wait()
+    let txn = await contract.playGame(1, {value: 123456789});
+    let result = await txn.wait();
+    console.log('transaction here:', txn);
+    console.log('returend value here:', result);
 };
 
 const runMain = async () => {

@@ -13,9 +13,9 @@ contract RPS {
         if (_choice == computer) {
             emit GameResult(computer, 'draw');
         } else if (
-            (_choice == 0 && computer == 1) ||
-            (_choice == 1 && computer == 2) ||
-            (_choice == 2 && computer == 0)
+            (_choice == 0 && computer == 2) ||
+            (_choice == 1 && computer == 0) ||
+            (_choice == 2 && computer == 1)
         ) {
             payable(msg.sender).transfer(msg.value * 2);
             emit GameResult(computer, 'player win');

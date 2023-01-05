@@ -104,7 +104,7 @@ function RockPaperScissor() {
 
   const renderMakeChoice = () => (
     <div>
-      <p>make your choice</p>
+      <p>make your choice baby</p>
       <p>if you win, u get 2x your bet</p>
       <button onClick={chooseRock}>rock</button>
       <button onClick={choosePaper}>paper</button>

@@ -89,15 +89,15 @@ function RockPaperScissor() {
 
   const renderFinalResults = () => (
     <div>
-      <p>computer choice: {computer}</p>
-      <p>game result: {result}</p>
+      <p>computer choice: <b>{computer}</b></p>
+      <p>game result: <b>{result}</b></p>
       <button onClick={playAgain}>play again</button>
     </div>
   )
 
   const renderGameResults = () => (
     <div>
-      <p>player choice: {choice}</p>
+      <p>player choice: <b>{choice}</b></p>
       {processing ? <p>processing game result..</p> : ( renderFinalResults() )}
     </div>
   )

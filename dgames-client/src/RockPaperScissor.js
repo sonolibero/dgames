@@ -6,6 +6,7 @@ function RockPaperScissor() {
   const [choice, setChoice] = React.useState('');
   const [computer, setComputer] = React.useState('');
   const [result, setResult] = React.useState('');
+  const [link, setLink] = React.useState('');
   const [processing, setProcessing] = React.useState(false);
   const CONTRACT_ADDRESS = '0x2E5f55cb16a9982064908568EBE6C27100bEC2FE';
 
@@ -69,6 +70,7 @@ function RockPaperScissor() {
       setProcessing(true);
       const txn =  await contract.playGame(player_choice, {value : ethers.utils.parseEther('0.001'), gasLimit : 100000});
       await txn.wait();
+      setLink(`https://goerli.etherscan.io/tx/${txn.hash}`)
       setProcessing(false);
     }
     catch(error) {
@@ -91,6 +93,7 @@ function RockPaperScissor() {
     <div>
       <p>computer choice: <b>{computer}</b></p>
       <p>game result: <b>{result}</b></p>
+      {link ? <p>game txn <b><a href={link} target='_blank' rel="noreferrer">here</a></b></p> : null}
       <button onClick={playAgain}>play again</button>
     </div>
   )

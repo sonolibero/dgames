@@ -49,7 +49,7 @@ function App() {
 
   const renderSelectGame = () => (
     <div>
-      <p>select game</p>
+      <p style={{color: '#FFDD00'}}>select game</p>
       <button onClick={selectGame}>
         rock paper scissor
       </button>
@@ -61,9 +61,9 @@ function App() {
   })
 
   return (
-    <div>
+    <div className='container'>
       <a href={TWITTER_LINK} target="_blank" rel="noreferrer">{`built by @${TWITTER_HANDLE}`}</a>
-      {currentAccount === '' ? ( renderConnectWallet() ) : <p>connected account: {currentAccount}</p>}
+      {currentAccount === '' ? ( renderConnectWallet() ) : <p>ur addy: <b>{currentAccount}</b></p>}
       {currentAccount !== '' & !game ? ( renderSelectGame() ) : null}
       {game === 'rps' ? ( <RockPaperScissor /> ) : null}
     </div>

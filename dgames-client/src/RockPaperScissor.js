@@ -91,8 +91,8 @@ function RockPaperScissor() {
 
   const renderFinalResults = () => (
     <div>
-      <p>computer choice: <b>{computer}</b></p>
-      <p>game result: <b>{result}</b></p>
+      <p>computer choice: <b style={{color: '#2DD2FF'}}>{computer}</b></p>
+      <p>game result: <b style={result === 'player win' ? {color:'#45E773'} : result === 'player lose' ? {color:'#FE484C'} : {color:'#FFDD00'}}>{result}</b></p>
       {link ? <p>game txn <b><a href={link} target='_blank' rel="noreferrer">here</a></b></p> : null}
       <button onClick={playAgain}>play again</button>
     </div>
@@ -100,15 +100,15 @@ function RockPaperScissor() {
 
   const renderGameResults = () => (
     <div>
-      <p>player choice: <b>{choice}</b></p>
-      {processing ? <p>processing game result..</p> : ( renderFinalResults() )}
+      <p>player choice: <b style={{color: '#2DD2FF'}}>{choice}</b></p>
+      {processing ? <p style={{color: '#FFDD00'}}>processing game result..</p> : ( renderFinalResults() )}
     </div>
   )
 
   const renderMakeChoice = () => (
     <div>
-      <p>make your choice</p>
       <p>if you win, u get 2x your bet</p>
+      <p style={{color: '#FFDD00'}}>make your choice</p>
       <button onClick={chooseRock}>rock</button>
       <button onClick={choosePaper}>paper</button>
       <button onClick={chooseScissors}>scissors</button>

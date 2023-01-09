@@ -64,6 +64,7 @@ function App() {
     <div className='app'>
       <div className='container'>
         <div className='header-container'>
+          <h1>dGames</h1>
           {currentAccount === '' ? ( renderConnectWallet() ) : <p>ur addy: <b>{currentAccount}</b></p>}
           {currentAccount !== '' & !game ? ( renderSelectGame() ) : null}
           {game === 'rps' ? ( <RockPaperScissor /> ) : null}

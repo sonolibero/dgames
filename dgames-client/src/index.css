@@ -32,3 +32,12 @@ a {
   color: #2DD2FF;
   font-weight: bold;
 }
+
+h1 {
+  font-family: 'Press Start 2P',
+    sans-serif;
+  background: -webkit-linear-gradient(bottom, #FFDD00 0%, #45E773 40%, #2DD2FF 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

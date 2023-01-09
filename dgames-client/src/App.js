@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
 import RockPaperScissor from './RockPaperScissor';
+import twitterLogo from './utils/twitter.svg';
 
 function App() {
   const TWITTER_HANDLE = 'verci_eth';
@@ -70,7 +71,10 @@ function App() {
           {game === 'rps' ? ( <RockPaperScissor /> ) : null}
         </div>
         <div className='footer-container'>
-          <a href={TWITTER_LINK} target="_blank" rel="noreferrer">{`built by @${TWITTER_HANDLE}`}</a></div>
+          <a href={TWITTER_LINK} target="_blank" rel="noreferrer">
+            <img alt="Twitter Logo" className="footer-logo" src={twitterLogo} />
+          </a>
+        </div>
       </div>
     </div>
   )

@@ -92,7 +92,7 @@ function RockPaperScissor() {
   const renderFinalResults = () => (
     <div>
       <p>computer choice: <b style={{color: '#2DD2FF'}}>{computer}</b></p>
-      <p>game result: <b style={result === 'player win' ? {color:'#45E773'} : result === 'player lose' ? {color:'#FE484C'} : {color:'#FFDD00'}}>{result}</b></p>
+      <p><b style={result === 'player win' ? {color:'#45E773'} : result === 'player lose' ? {color:'#FE484C'} : {color:'#FFDD00'}}>{result}</b></p>
       {link ? <p>game txn <b><a href={link} target='_blank' rel="noreferrer">here</a></b></p> : null}
       <button onClick={playAgain}>play again</button>
     </div>

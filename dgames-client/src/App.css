@@ -18,3 +18,8 @@
 .footer-container {
   padding-bottom: 30px;
 }
+
+.footer-logo {
+  width: 35px;
+  height: 35px;
+}

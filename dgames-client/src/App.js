@@ -61,11 +61,16 @@ function App() {
   })
 
   return (
-    <div className='container'>
-      <a href={TWITTER_LINK} target="_blank" rel="noreferrer">{`built by @${TWITTER_HANDLE}`}</a>
-      {currentAccount === '' ? ( renderConnectWallet() ) : <p>ur addy: <b>{currentAccount}</b></p>}
-      {currentAccount !== '' & !game ? ( renderSelectGame() ) : null}
-      {game === 'rps' ? ( <RockPaperScissor /> ) : null}
+    <div className='app'>
+      <div className='container'>
+        <div className='header-container'>
+          {currentAccount === '' ? ( renderConnectWallet() ) : <p>ur addy: <b>{currentAccount}</b></p>}
+          {currentAccount !== '' & !game ? ( renderSelectGame() ) : null}
+          {game === 'rps' ? ( <RockPaperScissor /> ) : null}
+        </div>
+        <div className='footer-container'>
+          <a href={TWITTER_LINK} target="_blank" rel="noreferrer">{`built by @${TWITTER_HANDLE}`}</a></div>
+      </div>
     </div>
   )
 }

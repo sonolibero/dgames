@@ -11,7 +11,7 @@ contract RPS {
         uint256 computer = random();
 
         if (_choice == computer) {
-            payable(msg.sender).transfer(msg.value);
+            payable(msg.sender).transfer(msg.value); // edu-150 to deploy
             emit GameResult(computer, 'draw');
         } else if (
             (_choice == 0 && computer == 2) ||

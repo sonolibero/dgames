@@ -107,7 +107,12 @@ function RockPaperScissor() {
 
   const renderMakeChoice = () => (
     <div>
-      <p>if you win, u get 2x your bet</p>
+      <p className='rules'>HOW TO PLAY</p>
+      <div><b>you VS smart contract</b></div>
+      <div>1. bet your eth</div>
+      <div>2. make ur choice</div>
+      <div>3. if u win {'>>'} u get 2x</div>
+      <div>4. if it's a draw u get em back</div>
       <p style={{color: '#FFDD00'}}>make your choice</p>
       <button onClick={chooseRock}>rock</button>
       <button onClick={choosePaper}>paper</button>

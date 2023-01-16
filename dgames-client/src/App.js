@@ -50,7 +50,7 @@ function App() {
 
   const renderSelectGame = () => (
     <div>
-      <p style={{color: '#FFDD00'}}>select game</p>
+      <p style={{color: '#FFDD00'}}><b>select game</b></p>
       <button onClick={selectGame}>
         rock paper scissor
       </button>

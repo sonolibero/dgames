@@ -7,8 +7,13 @@ function RockPaperScissor() {
   const [computer, setComputer] = React.useState('');
   const [result, setResult] = React.useState('');
   const [link, setLink] = React.useState('');
+  const [msgValue, setMsgValue] = React.useState(0.005);
   const [processing, setProcessing] = React.useState(false);
   const CONTRACT_ADDRESS = '0x2E5f55cb16a9982064908568EBE6C27100bEC2FE';
+
+  const handleChange = event => {
+    setMsgValue(event.target.value);
+  }
 
   const chooseRock = () => {
     if(choice) {
@@ -68,7 +73,7 @@ function RockPaperScissor() {
       });
 
       setProcessing(true);
-      const txn =  await contract.playGame(player_choice, {value : ethers.utils.parseEther('0.001'), gasLimit : 100000});
+      const txn =  await contract.playGame(player_choice, {value : ethers.utils.parseEther(msgValue.toString()), gasLimit : 100000});
       await txn.wait();
       setLink(`https://goerli.etherscan.io/tx/${txn.hash}`)
       setProcessing(false);
@@ -110,10 +115,17 @@ function RockPaperScissor() {
       <p className='rules'>HOW TO PLAY</p>
       <div><b>you VS smart contract</b></div>
       <div>1. bet your eth</div>
-      <div>2. make ur choice</div>
-      <div>3. if u win {'>>'} u get 2x</div>
-      <div>4. if it's a draw u get em back</div>
-      <p style={{color: '#FFDD00'}}>make your choice</p>
+      <div>2. make ur choice</div><br></br>
+      <div>if u win {'>>'} u get 2x</div>
+      <div>if it's a draw u get em back</div><br></br>
+      <input
+        type="number"
+        value={msgValue}
+        onChange={handleChange}
+        min={0}
+        step={0.005}
+      />
+      <p style={{color: '#FFDD00'}}><b>make your choice</b></p>
       <button onClick={chooseRock}>rock</button>
       <button onClick={choosePaper}>paper</button>
       <button onClick={chooseScissors}>scissors</button>

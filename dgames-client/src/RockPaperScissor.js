@@ -115,9 +115,11 @@ function RockPaperScissor() {
       <p className='rules'>HOW TO PLAY</p>
       <div><b>you VS smart contract</b></div>
       <div>1. bet your eth</div>
-      <div>2. make ur choice</div><br></br>
-      <div>if u win {'>>'} u get 2x</div>
-      <div>if it's a draw u get em back</div><br></br>
+      <div>2. make ur choice</div>
+      <div>3. get game result</div><br></br>
+      <div>win {'>>'} u get 2x</div>
+      <div>draw {'>>'} u get em back</div>
+      <div>lose {'>>'} pay the creator</div><br></br>
       <input
         type="number"
         value={msgValue}

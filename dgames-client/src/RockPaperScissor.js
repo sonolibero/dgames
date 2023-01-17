@@ -125,13 +125,7 @@ function RockPaperScissor() {
     <div>
       <p className='rules'>HOW TO PLAY</p>
       <div><b>you VS smart contract</b></div>
-      <div>1. bet your eth</div>
-      <div>2. make ur choice</div>
-      <div>3. get game result</div><br></br>
-      <div>win {'>>'} u get 2x</div>
-      <div>draw {'>>'} u get em back</div>
-      <div>lose {'>>'} pay the creator</div><br></br>
-      <div>{min_bet} - {max_bet}</div>
+      <p style={{color: '#FFDD00'}}><b>1. bet your eth {min_bet} - {max_bet}</b></p>
       <input
         type="number"
         value={msgValue}
@@ -140,10 +134,14 @@ function RockPaperScissor() {
         max={max_bet}
         step={0.001}
       />
-      <p style={{color: '#FFDD00'}}><b>make your choice</b></p>
+      <p style={{color: '#FFDD00'}}><b>2. make your choice</b></p>
       <button onClick={chooseRock}>rock</button>
       <button onClick={choosePaper}>paper</button>
       <button onClick={chooseScissors}>scissors</button>
+      <p style={{color: '#FFDD00'}}><b>3. wait for the result</b></p>
+      <div>player win {'>'}{'>'} u get 2x</div>
+      <div>draw {'>'}{'>'} u get em back</div>
+      <div>player lose {'>'}{'>'} fund contract</div>
     </div>
   )
 

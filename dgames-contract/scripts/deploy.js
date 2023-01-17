@@ -1,6 +1,6 @@
 const main = async () => {
   const contractFactory = await hre.ethers.getContractFactory('RPS');
-  const contract = await contractFactory.deploy({value: hre.ethers.utils.parseEther('0.005')});
+  const contract = await contractFactory.deploy({value: hre.ethers.utils.parseEther('0.1')});
   await contract.deployed();
   console.log('contract deployed to:', contract.address);
 };

@@ -9,7 +9,7 @@ function RockPaperScissor() {
   const [link, setLink] = React.useState('');
   const [msgValue, setMsgValue] = React.useState(0.005);
   const [processing, setProcessing] = React.useState(false);
-  const CONTRACT_ADDRESS = '0x3776f63fDB230e25780C1aDdA4eEc3b87F20f792';
+  const CONTRACT_ADDRESS = '0x53f6FA5bC0Ddcfb0A3Fe3FF2473126f689Bab4A7';
   const min_bet = 0.001
   const max_bet = 0.01
 

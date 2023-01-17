@@ -10,9 +10,20 @@ function RockPaperScissor() {
   const [msgValue, setMsgValue] = React.useState(0.005);
   const [processing, setProcessing] = React.useState(false);
   const CONTRACT_ADDRESS = '0x3776f63fDB230e25780C1aDdA4eEc3b87F20f792';
+  const min_bet = 0.001
+  const max_bet = 0.01
 
   const handleChange = event => {
-    setMsgValue(event.target.value);
+    let i = event.target.value
+    if(i > max_bet) {
+      setMsgValue(max_bet);
+    }
+    else if (i < min_bet) {
+      setMsgValue(min_bet);
+    }
+    else {
+      setMsgValue(i);
+    }
   }
 
   const chooseRock = () => {
@@ -120,13 +131,14 @@ function RockPaperScissor() {
       <div>win {'>>'} u get 2x</div>
       <div>draw {'>>'} u get em back</div>
       <div>lose {'>>'} pay the creator</div><br></br>
+      <div>{min_bet} - {max_bet}</div>
       <input
         type="number"
         value={msgValue}
         onChange={handleChange}
-        min={0.001}
-        max={0.1}
-        step={0.005}
+        min={min_bet}
+        max={max_bet}
+        step={0.001}
       />
       <p style={{color: '#FFDD00'}}><b>make your choice</b></p>
       <button onClick={chooseRock}>rock</button>

@@ -124,7 +124,7 @@ function RockPaperScissor() {
         type="number"
         value={msgValue}
         onChange={handleChange}
-        min={0}
+        min={0.001}
         max={0.1}
         step={0.005}
       />

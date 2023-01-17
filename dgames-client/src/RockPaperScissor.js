@@ -125,6 +125,7 @@ function RockPaperScissor() {
         value={msgValue}
         onChange={handleChange}
         min={0}
+        max={0.1}
         step={0.005}
       />
       <p style={{color: '#FFDD00'}}><b>make your choice</b></p>

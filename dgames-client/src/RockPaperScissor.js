@@ -9,7 +9,7 @@ function RockPaperScissor() {
   const [link, setLink] = React.useState('');
   const [msgValue, setMsgValue] = React.useState(0.005);
   const [processing, setProcessing] = React.useState(false);
-  const CONTRACT_ADDRESS = '0x2E5f55cb16a9982064908568EBE6C27100bEC2FE';
+  const CONTRACT_ADDRESS = '0x3776f63fDB230e25780C1aDdA4eEc3b87F20f792';
 
   const handleChange = event => {
     setMsgValue(event.target.value);

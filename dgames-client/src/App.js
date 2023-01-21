@@ -40,8 +40,8 @@ function App() {
 
   const renderConnectWallet = () => (
     <div>
-      <p>decentralized fun &gt;&gt; no sign up, no personal data</p>
-      <p>just you, your wallet and have fun</p>
+      <p>🕹️ play games -- win rewards 🤑</p>
+      <p>✍🏽 no sign up -- no personal info 🙅</p>
       <button onClick={connectWallet}>start playin</button>
     </div>
   )

@@ -6,6 +6,7 @@ import twitterLogo from './utils/twitter.svg';
 function App() {
   const TWITTER_HANDLE = 'verci_eth';
   const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
+  const TWEET_LINK = 'https://twitter.com/intent/tweet?text=@verci_eth%20hey%20dude!%20%F0%9F%A4%93%0A%0A%F0%9F%95%B9%EF%B8%8F%20dGames%20is%20fun!%0A%0Ato%20make%20it%20even%20funnier,%20I%20would%20add%20%3Center%20your%20fav%20game%3E';
   const [currentAccount, setCurrentAccount] = React.useState('');
   const [game, setGame] = React.useState('');
 
@@ -50,12 +51,15 @@ function App() {
     setGame('rps');
   }
 
+  const requestNewGame = () => {
+    window.open(TWEET_LINK, '_blank');
+  }
+
   const renderSelectGame = () => (
     <div>
       <p style={{color: '#FFDD00'}}><b>select game</b></p>
-      <button onClick={selectGame}>
-        rock paper scissor
-      </button>
+      <button onClick={selectGame}>rock paper scissor</button>
+      <button className='new-game' onClick={requestNewGame}>+</button>
     </div>
   )
 

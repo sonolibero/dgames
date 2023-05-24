@@ -42,7 +42,6 @@ function App() {
   const renderConnectWallet = () => (
     <div>
       <p>🕹️ play games -- win rewards 🤑</p>
-      <p>✍🏽 no sign up -- no personal info 🙅</p>
       <button onClick={connectWallet}>start playin</button>
     </div>
   )
